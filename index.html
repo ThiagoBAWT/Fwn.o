@@ -1,0 +1,710 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fwn.o Wealth — Planejamento para momentos decisivos</title>
+<meta name="description" content="Multi Family Office independente. Apoiamos famílias na travessia de momentos decisivos, para que as escolhas feitas sob pressão sustentem seu patrimônio e a vida que vem depois.">
+<link rel="icon" type="image/svg+xml" href="simbolo-fwno.svg">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#2d3748;        /* brand primary */
+  --abyss:#1a212d;      /* ink, deepened */
+  --ink-2:#3a465b;      /* ink, lifted */
+  --mist:#e7ebf1;       /* ink, washed */
+  --paper:#f5f6f8;
+  --brass:#c9945f;      /* warm complement of the slate */
+  --brass-2:#e2b98e;
+  --line:rgba(45,55,72,.14);
+  --spring:cubic-bezier(.22,1.2,.36,1);
+  --out:cubic-bezier(.16,1,.3,1);
+  --s1:8px;--s2:16px;--s3:24px;--s4:40px;--s5:64px;--s6:104px;
+  --shadow-1:0 1px 2px rgba(26,33,45,.06),0 4px 14px -6px rgba(26,33,45,.12);
+  --shadow-2:0 2px 4px rgba(26,33,45,.06),0 18px 40px -16px rgba(26,33,45,.28),0 40px 80px -40px rgba(45,55,72,.35);
+  --shadow-3:0 4px 10px rgba(10,14,20,.18),0 30px 70px -20px rgba(10,14,20,.55);
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:"IBM Plex Sans",system-ui,sans-serif;font-size:17px;line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;max-width:100%}
+a{color:inherit}
+.display{font-family:Manrope,sans-serif;font-weight:800;letter-spacing:-.035em;line-height:1.02}
+.h2{font-family:Manrope,sans-serif;font-weight:800;letter-spacing:-.03em;line-height:1.05;font-size:clamp(34px,5.2vw,68px);margin:0}
+.mono{font-family:"IBM Plex Mono",monospace;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase}
+.wrap{width:100%;max-width:1280px;margin:0 auto;padding:0 var(--s3)}
+@media (min-width:768px){.wrap{padding:0 var(--s4)}}
+.grain::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.16;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+/* ---------- buttons ---------- */
+.btn{position:relative;display:inline-flex;align-items:center;gap:12px;padding:15px 24px;border-radius:999px;font-family:Manrope,sans-serif;font-weight:700;font-size:15.5px;text-decoration:none;cursor:pointer;border:0;
+  transition:transform .5s var(--spring),box-shadow .4s var(--out),background-color .3s,color .3s;will-change:transform}
+.btn:hover{transform:translateY(-2px)}
+.btn:active{transform:translateY(1px) scale(.97);transition-duration:.12s}
+.btn:focus-visible,.focusable:focus-visible{outline:2px solid var(--brass-2);outline-offset:3px}
+.btn-brass{background:var(--brass);color:#1a1510;box-shadow:0 1px 0 rgba(255,255,255,.35) inset,0 12px 30px -10px rgba(201,148,95,.65)}
+.btn-brass:hover{background:var(--brass-2);box-shadow:0 1px 0 rgba(255,255,255,.4) inset,0 18px 40px -12px rgba(201,148,95,.8)}
+.btn-glass{background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.22);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.btn-glass:hover{background:rgba(255,255,255,.16)}
+.btn-ink{background:var(--ink);color:#fff;box-shadow:var(--shadow-2)}
+.btn-ink:hover{background:var(--abyss)}
+.btn .arr{display:inline-block;transition:transform .5s var(--spring)}
+.btn:hover .arr{transform:translateX(4px)}
+
+/* ---------- nav ---------- */
+.nav{position:fixed;top:14px;left:0;right:0;z-index:50;pointer-events:none}
+.nav-in{pointer-events:auto;display:flex;align-items:center;justify-content:space-between;gap:var(--s2);padding:10px 10px 10px 20px;border-radius:999px;
+  background:rgba(26,33,45,.74);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%);box-shadow:var(--shadow-3)}
+.nav-logo img{height:34px;width:auto}
+.nav-links{display:none;gap:4px}
+.nav-links a{color:rgba(255,255,255,.82);text-decoration:none;font-size:14.5px;font-weight:500;padding:9px 14px;border-radius:999px;transition:background-color .25s,color .25s,transform .4s var(--spring)}
+.nav-links a:hover{background:rgba(255,255,255,.1);color:#fff}
+.nav-links a:active{transform:scale(.96)}
+.nav-links a:focus-visible{outline:2px solid var(--brass-2);outline-offset:2px}
+.nav .btn{padding:11px 18px;font-size:14px}
+.menu-btn{display:inline-flex;width:44px;height:44px;border-radius:999px;align-items:center;justify-content:center;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);color:#fff;cursor:pointer;transition:transform .4s var(--spring),background-color .25s}
+.menu-btn:hover{background:rgba(255,255,255,.16)}.menu-btn:active{transform:scale(.92)}
+.menu-btn:focus-visible{outline:2px solid var(--brass-2);outline-offset:2px}
+.nav-cta{display:none}
+@media (min-width:1000px){.nav-links{display:flex}.menu-btn{display:none}.nav-cta{display:inline-flex}}
+.drawer{pointer-events:auto;margin-top:8px;border-radius:24px;padding:12px;background:rgba(26,33,45,.86);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.12);display:none}
+.drawer.open{display:grid;gap:4px;animation:drop .5s var(--out)}
+.drawer a{color:#fff;text-decoration:none;padding:14px 16px;border-radius:14px;font-weight:500}
+.drawer a:hover,.drawer a:focus-visible{background:rgba(255,255,255,.08);outline:none}
+@keyframes drop{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+
+/* ---------- hero ---------- */
+.hero{position:relative;min-height:100svh;color:#fff;background:var(--abyss);overflow:hidden;display:flex;flex-direction:column}
+.hero-photo{position:absolute;inset:0}
+.hero-photo img{width:100%;height:100%;object-fit:cover;transform:scale(1.06);animation:settle 2.6s var(--out) forwards}
+@keyframes settle{to{transform:scale(1)}}
+.hero-tint{position:absolute;inset:0;background:var(--ink);mix-blend-mode:multiply;opacity:.92}
+.hero-glow{position:absolute;inset:0;background:
+  radial-gradient(60% 55% at 78% 42%,rgba(201,148,95,.30),transparent 62%),
+  radial-gradient(45% 40% at 12% 18%,rgba(120,150,190,.22),transparent 70%),
+  radial-gradient(80% 60% at 50% 110%,rgba(10,14,20,.85),transparent 70%),
+  linear-gradient(180deg,rgba(26,33,45,.55),rgba(26,33,45,0) 30%)}
+.hero-grid{position:relative;z-index:2;flex:1;display:grid;align-items:center;gap:var(--s3);padding-top:112px;padding-bottom:var(--s2)}
+@media (min-width:1000px){.hero-grid{grid-template-columns:1.1fr .9fr;padding-top:100px}}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;color:var(--brass-2)}
+.eyebrow i{width:28px;height:1px;background:currentColor;display:block}
+.hero h1{font-size:clamp(40px,5.4vw,76px);margin:20px 0 0}
+.hero h1 .soft{color:rgba(255,255,255,.55)}
+.hero-sub{max-width:540px;margin:20px 0 0;color:rgba(255,255,255,.78);font-size:18px}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.stage{position:relative;height:min(52vh,480px);min-height:320px;cursor:grab;touch-action:pan-y;user-select:none}
+.stage:active{cursor:grabbing}
+.stage canvas{position:absolute;inset:0;width:100%!important;height:100%!important}
+.stage-ring{position:absolute;inset:8% 6%;border-radius:50%;border:1px solid rgba(255,255,255,.10);pointer-events:none}
+.stage-ring.two{inset:20% 18%;border-style:dashed;border-color:rgba(226,185,142,.22)}
+.drag-hint{position:absolute;left:50%;bottom:6px;transform:translateX(-50%);display:flex;align-items:center;gap:10px;padding:9px 16px;border-radius:999px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:rgba(255,255,255,.85);white-space:nowrap;pointer-events:none}
+.drag-hint svg{animation:nudge 2.4s var(--out) infinite}
+@keyframes nudge{0%,100%{transform:translateX(-3px)}50%{transform:translateX(3px)}}
+.hero-legal{position:relative;z-index:2;padding-bottom:var(--s3)}
+.legal-card{border-radius:22px;padding:20px 24px;background:rgba(15,20,28,.48);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);color:rgba(255,255,255,.9);font-size:15.5px;line-height:1.65;box-shadow:var(--shadow-3)}
+.legal-card p{margin:0}
+.legal-card p+p{margin-top:8px}
+.legal-card a{color:var(--brass-2);text-underline-offset:3px;transition:color .2s}
+.legal-card a:hover{color:#fff}
+.legal-card a:focus-visible{outline:2px solid var(--brass-2);outline-offset:2px;border-radius:4px}
+.rise{opacity:0;transform:translateY(22px);animation:rise 1.1s var(--out) forwards}
+@keyframes rise{to{opacity:1;transform:none}}
+
+/* ---------- values marquee ---------- */
+.values{position:relative;background:var(--paper);padding:var(--s5) 0;overflow:hidden;border-bottom:1px solid var(--line)}
+.loop{cursor:grab;touch-action:pan-y;user-select:none;-webkit-user-select:none}
+.loop:active{cursor:grabbing}
+.loop-track{display:flex;width:max-content;will-change:transform}
+.val{display:flex;align-items:center;gap:36px;padding-right:36px;font-family:Manrope,sans-serif;font-weight:800;font-size:clamp(48px,8vw,112px);letter-spacing:-.04em;line-height:1;white-space:nowrap}
+.val .o{color:var(--brass)}
+.val .dot{width:18px;height:18px;border-radius:50%;background:var(--brass);flex:none}
+.values-cap{display:flex;justify-content:space-between;gap:var(--s2);margin-bottom:var(--s3);color:rgba(45,55,72,.7)}
+
+/* ---------- moments ---------- */
+.moments{position:relative;color:#fff;padding:var(--s6) 0 var(--s5);overflow:hidden;background:var(--ink)}
+.m-bg{position:absolute;inset:0;opacity:0;transition:opacity 1.1s var(--out)}
+.m-bg.on{opacity:1}
+.m-head{position:relative;z-index:2;display:grid;gap:var(--s3);align-items:end}
+@media (min-width:900px){.m-head{grid-template-columns:1.2fr .8fr}}
+.m-head p{color:rgba(255,255,255,.78);margin:0;max-width:440px}
+.m-now{position:relative;z-index:2;margin-top:var(--s4);display:flex;align-items:center;gap:14px;color:rgba(255,255,255,.75)}
+.m-now b{color:#fff;font-weight:500}
+.m-now .bar{flex:1;height:1px;background:rgba(255,255,255,.2);position:relative;overflow:hidden}
+.m-now .bar i{position:absolute;inset:0 auto 0 0;width:100%;background:var(--brass-2);transform-origin:left;transform:scaleX(.14);transition:transform .8s var(--out)}
+.m-loop{position:relative;z-index:2;margin-top:var(--s3);padding:var(--s2) 0 var(--s3)}
+.m-card{position:relative;flex:none;width:min(78vw,400px);margin-right:20px;border-radius:26px;overflow:hidden;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);box-shadow:var(--shadow-3);transition:transform .7s var(--spring),border-color .4s}
+.m-card.active{border-color:rgba(226,185,142,.6)}
+.m-card:hover{transform:translateY(-6px)}
+.m-photo{position:relative;height:300px;overflow:hidden}
+.m-photo img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--out);pointer-events:none}
+.m-card:hover .m-photo img{transform:scale(1.06)}
+.m-photo .tint{position:absolute;inset:0;mix-blend-mode:multiply;opacity:.55}
+.m-photo .fade{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.6),rgba(0,0,0,0) 55%)}
+.m-photo .tag{position:absolute;left:16px;top:16px;padding:7px 12px;border-radius:999px;background:rgba(255,255,255,.14);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.22)}
+.m-body{padding:22px 24px 26px;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.m-body h3{font-family:Manrope,sans-serif;font-weight:800;font-size:26px;letter-spacing:-.025em;line-height:1.15;margin:0}
+.m-body p{margin:10px 0 0;color:rgba(255,255,255,.78);font-size:15.5px;line-height:1.6}
+.m-body .q{margin-top:16px;padding-top:14px;border-top:1px solid rgba(255,255,255,.14);color:var(--brass-2);font-size:14.5px;line-height:1.5}
+.m-ghost{position:absolute;right:-2vw;bottom:-3vw;z-index:1;font-family:Manrope,sans-serif;font-weight:800;font-size:22vw;letter-spacing:-.06em;line-height:.8;color:rgba(255,255,255,.04);pointer-events:none;white-space:nowrap;transition:opacity .6s}
+
+/* ---------- method ---------- */
+.method{position:relative;background:var(--mist);padding:var(--s6) 0;overflow:hidden}
+.method::before{content:"";position:absolute;inset:0;background:radial-gradient(50% 60% at 100% 0%,rgba(201,148,95,.18),transparent 70%),radial-gradient(40% 50% at 0% 100%,rgba(45,55,72,.12),transparent 70%)}
+.method-grid{position:relative;display:grid;gap:var(--s4)}
+@media (min-width:1000px){.method-grid{grid-template-columns:.9fr 1.1fr;align-items:start}}
+.method-photo{position:relative;border-radius:28px;overflow:hidden;min-height:440px;box-shadow:var(--shadow-2)}
+.method-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.method-photo .tint{position:absolute;inset:0;background:var(--ink);mix-blend-mode:multiply;opacity:.45}
+.method-photo .fade{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.6),transparent 60%)}
+.method-photo .float{position:absolute;left:18px;right:18px;bottom:18px;padding:20px 22px;border-radius:20px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);color:#fff;box-shadow:var(--shadow-3)}
+.method-photo .float p{margin:6px 0 0;font-family:Manrope,sans-serif;font-weight:700;font-size:21px;letter-spacing:-.02em;line-height:1.3}
+.steps{display:grid;gap:14px;margin-top:var(--s4)}
+.step{display:grid;grid-template-columns:auto 1fr;gap:18px;padding:22px 24px;border-radius:22px;background:rgba(255,255,255,.72);border:1px solid rgba(255,255,255,.9);box-shadow:var(--shadow-1);backdrop-filter:blur(8px);transition:transform .6s var(--spring),box-shadow .4s}
+.step:hover{transform:translateX(6px);box-shadow:var(--shadow-2)}
+.step .n{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;background:var(--ink);color:#fff;font-family:Manrope,sans-serif;font-weight:800}
+.step h3{margin:0;font-family:Manrope,sans-serif;font-weight:800;font-size:21px;letter-spacing:-.02em}
+.step p{margin:4px 0 0;color:rgba(45,55,72,.82);font-size:16px;line-height:1.6}
+.creds{display:flex;flex-wrap:wrap;gap:8px;margin-top:var(--s3)}
+.chip{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.6);font-size:14px;font-weight:500}
+.chip i{width:6px;height:6px;border-radius:50%;background:var(--brass)}
+
+/* ---------- specialties ---------- */
+.spec{position:relative;background:var(--paper);padding:var(--s6) 0}
+.spec-grid{display:grid;gap:16px;margin-top:var(--s4)}
+@media (min-width:760px){.spec-grid{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:1100px){.spec-grid{grid-template-columns:repeat(6,1fr);grid-auto-rows:320px}.spec-grid .sc{min-height:0}
+  .sc:nth-child(1){grid-column:span 4;grid-row:span 2}
+  .sc:nth-child(2){grid-column:span 2}
+  .sc:nth-child(3){grid-column:span 2}
+  .sc:nth-child(4){grid-column:span 3}
+  .sc:nth-child(5){grid-column:span 3}}
+.sc{position:relative;border-radius:26px;overflow:hidden;min-height:340px;color:#fff;isolation:isolate;box-shadow:var(--shadow-2);text-decoration:none;display:flex;flex-direction:column;justify-content:flex-end;padding:26px;transition:transform .7s var(--spring),box-shadow .5s var(--out)}
+.sc:hover{transform:translateY(-6px);box-shadow:0 2px 4px rgba(26,33,45,.08),0 30px 60px -20px rgba(26,33,45,.45)}
+.sc:active{transform:translateY(-2px) scale(.99)}
+.sc:focus-visible{outline:3px solid var(--brass);outline-offset:4px}
+.sc img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-3;transition:transform 1.4s var(--out)}
+.sc:hover img{transform:scale(1.07)}
+.sc .tint{position:absolute;inset:0;z-index:-2;mix-blend-mode:multiply;opacity:.62;transition:opacity .6s var(--out)}
+.sc:hover .tint{opacity:.42}
+.sc .fade{position:absolute;inset:0;z-index:-1;background:linear-gradient(to top,rgba(0,0,0,.72),rgba(0,0,0,.08) 65%)}
+.sc h3{margin:0;font-family:Manrope,sans-serif;font-weight:800;font-size:clamp(24px,2.4vw,32px);letter-spacing:-.03em;line-height:1.1}
+.sc p{margin:8px 0 0;color:rgba(255,255,255,.86);font-size:15.5px;line-height:1.55;max-width:460px}
+.sc .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.sc .chips span{padding:7px 13px;border-radius:999px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.24);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);font-size:13.5px;font-weight:500}
+.sc .go{position:absolute;top:20px;right:20px;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.26);backdrop-filter:blur(10px);transition:transform .6s var(--spring),background-color .3s}
+.sc:hover .go{transform:rotate(-45deg);background:var(--brass);border-color:var(--brass)}
+
+/* ---------- audience ---------- */
+.aud{position:relative;color:#fff;background:var(--abyss);padding:var(--s6) 0;overflow:hidden}
+.aud::before{content:"";position:absolute;inset:0;background:radial-gradient(55% 70% at 85% 30%,rgba(201,148,95,.22),transparent 65%),radial-gradient(50% 60% at 5% 90%,rgba(95,125,165,.25),transparent 70%)}
+.aud-grid{position:relative;display:grid;gap:16px;margin-top:var(--s4)}
+@media (min-width:900px){.aud-grid{grid-template-columns:repeat(3,1fr)}}
+.th{border-radius:24px;padding:28px;background:linear-gradient(160deg,rgba(255,255,255,.09),rgba(255,255,255,.03));border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(10px);box-shadow:var(--shadow-3);transition:transform .6s var(--spring),border-color .4s}
+.th:hover{transform:translateY(-4px);border-color:rgba(226,185,142,.45)}
+.th .v{font-family:Manrope,sans-serif;font-weight:800;font-size:clamp(40px,4.6vw,58px);letter-spacing:-.04em;line-height:1;color:#fff}
+.th .v small{font-size:.42em;letter-spacing:-.01em;color:var(--brass-2);margin-left:4px}
+.th p{margin:14px 0 0;color:rgba(255,255,255,.78);font-size:16px;line-height:1.6}
+.aud-or{position:relative;display:flex;align-items:center;gap:14px;margin-top:var(--s3);color:rgba(255,255,255,.7)}
+.profiles{position:relative;display:flex;flex-wrap:wrap;gap:10px;margin-top:var(--s4)}
+.profiles span{padding:11px 18px;border-radius:999px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.05);font-weight:500;font-size:15px}
+
+/* ---------- banker ---------- */
+.who{position:relative;background:var(--paper);padding:var(--s6) 0;overflow:hidden}
+.who-grid{display:grid;gap:var(--s4)}
+@media (min-width:1000px){.who-grid{grid-template-columns:1fr 1fr;align-items:end}}
+.who-name{font-size:clamp(46px,7vw,96px);margin:var(--s2) 0 0;color:var(--ink)}
+.who-role{margin-top:var(--s2);color:rgba(45,55,72,.72)}
+.who-copy p{margin:0 0 var(--s2);font-size:18px;color:rgba(45,55,72,.88)}
+.vision{position:relative;margin-top:var(--s5);border-radius:28px;padding:clamp(28px,4vw,48px);background:var(--ink);color:#fff;overflow:hidden;box-shadow:var(--shadow-2)}
+.vision::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 90% at 100% 0%,rgba(201,148,95,.35),transparent 60%)}
+.vision blockquote{position:relative;margin:var(--s2) 0 0;font-family:Manrope,sans-serif;font-weight:700;font-size:clamp(24px,3vw,38px);letter-spacing:-.025em;line-height:1.25;max-width:960px}
+.vision blockquote em{font-style:normal;color:var(--brass-2)}
+
+/* ---------- cta ---------- */
+.cta{position:relative;color:#fff;overflow:hidden;padding:var(--s6) 0;min-height:620px;display:flex;align-items:center}
+.cta img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.cta .tint{position:absolute;inset:0;background:var(--ink);mix-blend-mode:multiply;opacity:.7}
+.cta .fade{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.6),rgba(0,0,0,.1) 70%)}
+.cta-card{position:relative;max-width:680px;border-radius:30px;padding:clamp(28px,4vw,48px);background:rgba(20,26,36,.42);border:1px solid rgba(255,255,255,.16);backdrop-filter:blur(20px) saturate(130%);-webkit-backdrop-filter:blur(20px) saturate(130%);box-shadow:var(--shadow-3)}
+.cta-card h2{font-size:clamp(34px,4.6vw,58px)}
+.cta-card p{color:rgba(255,255,255,.8);margin:var(--s2) 0 0}
+.contact-row{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:var(--s3);color:rgba(255,255,255,.85);font-size:15.5px}
+.contact-row a{text-decoration:none;border-bottom:1px solid rgba(255,255,255,.3);transition:border-color .2s,color .2s}
+.contact-row a:hover{color:var(--brass-2);border-color:var(--brass-2)}
+.contact-row a:focus-visible{outline:2px solid var(--brass-2);outline-offset:3px}
+
+/* ---------- footer ---------- */
+footer{background:var(--abyss);color:rgba(255,255,255,.78);padding:var(--s5) 0 var(--s4)}
+.f-top{display:grid;gap:var(--s4)}
+@media (min-width:900px){.f-top{grid-template-columns:1.2fr 1fr 1fr}}
+footer h4{margin:0 0 12px;color:#fff;font-family:Manrope,sans-serif;font-size:15px}
+footer ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+footer a{text-decoration:none;transition:color .2s}
+footer a:hover{color:var(--brass-2)}
+footer a:focus-visible{outline:2px solid var(--brass-2);outline-offset:2px;border-radius:4px}
+.f-legal{margin-top:var(--s5);padding-top:var(--s3);border-top:1px solid rgba(255,255,255,.1);font-size:15px;line-height:1.65}
+.f-legal p{margin:0 0 8px}
+
+.wa-float{position:fixed;right:18px;bottom:18px;z-index:40;width:58px;height:58px;border-radius:50%;display:grid;place-items:center;background:var(--brass);color:#1a1510;box-shadow:0 14px 30px -8px rgba(201,148,95,.7),0 2px 6px rgba(0,0,0,.2);transition:transform .5s var(--spring)}
+.wa-float:hover{transform:scale(1.08) rotate(-6deg)}
+.wa-float:active{transform:scale(.94)}
+.wa-float:focus-visible{outline:2px solid #fff;outline-offset:3px}
+
+@media (prefers-reduced-motion:reduce){
+  .rise{animation-duration:.6s;transform:none}
+  .hero-photo img{animation:none;transform:none}
+  .drag-hint svg{animation:none}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header class="nav">
+  <div class="wrap">
+    <div class="nav-in">
+      <a href="#topo" class="nav-logo focusable" aria-label="Fwn.o Wealth — início"><img src="logo-fwno-wealth-branco.svg" alt="Fwn.o Wealth" width="200" height="56"></a>
+      <nav class="nav-links" aria-label="Principal">
+        <a href="#momentos">Momentos</a>
+        <a href="#metodo">Método</a>
+        <a href="#estrategia">Estratégia</a>
+        <a href="#para-quem">Para quem</a>
+        <a href="#quem">Quem conduz</a>
+      </nav>
+      <div style="display:flex;gap:8px;align-items:center">
+        <a class="btn btn-brass nav-cta wa" href="#" target="_blank" rel="noopener">Agendar conversa <span class="arr">→</span></a>
+        <button class="menu-btn" aria-expanded="false" aria-controls="drawer" aria-label="Abrir menu">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 6h14M3 14h14"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="drawer" id="drawer">
+      <a href="#momentos">Momentos</a><a href="#metodo">Método</a><a href="#estrategia">Estratégia</a><a href="#para-quem">Para quem</a><a href="#quem">Quem conduz</a>
+      <a class="btn btn-brass wa" href="#" target="_blank" rel="noopener" style="justify-content:center;margin-top:6px">Agendar conversa</a>
+    </div>
+  </div>
+</header>
+
+<main>
+<!-- HERO -->
+<section class="hero grain" id="topo">
+  <div class="hero-photo"><img src="assets/estrada.jpg" alt="" fetchpriority="high"></div>
+  <div class="hero-tint"></div>
+  <div class="hero-glow"></div>
+
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow mono rise" style="animation-delay:.1s"><i></i>Multi Family Office independente</span>
+      <h1 class="display rise" style="animation-delay:.22s">Poucos momentos definem o patrimônio <span class="soft">de uma vida.</span></h1>
+      <p class="hero-sub rise" style="animation-delay:.36s">Apoiamos famílias na travessia de momentos decisivos, para que as escolhas feitas sob pressão sustentem seu patrimônio e a vida que vem depois.</p>
+      <div class="hero-ctas rise" style="animation-delay:.5s">
+        <a class="btn btn-brass wa" href="#" target="_blank" rel="noopener">Agendar conversa <span class="arr">→</span></a>
+        <a class="btn btn-glass" href="#momentos">Ver momentos decisivos</a>
+      </div>
+    </div>
+    <div class="stage rise" id="stage" style="animation-delay:.4s" aria-label="Símbolo Fwn.o em 3D. Arraste para girar." role="img">
+      <div class="stage-ring"></div><div class="stage-ring two"></div>
+      <div class="drag-hint mono"><svg width="22" height="12" viewBox="0 0 22 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M5 2 1 6l4 4M17 2l4 4-4 4M1 6h20"/></svg>Arraste para girar</div>
+    </div>
+  </div>
+
+  <div class="wrap hero-legal rise" style="animation-delay:.7s">
+    <div class="legal-card">
+      <p>A Fwn.o Wealth integra o ecossistema da AWT Alliance S.A. e atua em educação financeira e planejamento financeiro e patrimonial. Serviços sujeitos a regulação são prestados pelas empresas do AWT Group devidamente habilitadas para cada atividade. A administração e gestão de carteiras de valores mobiliários é realizada pela AWT Consultoria e Administração de Valores Mobiliários Ltda., CNPJ 35.137.445/0001-00, registrada perante a CVM.</p>
+      <p>Consulte os Avisos Legais e Regulatórios do AWT Group: <a href="https://www.awtgroup.com.br" target="_blank" rel="noopener">www.awtgroup.com.br</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section class="values" aria-label="Valores">
+  <div class="wrap values-cap mono"><span>Nossos valores</span><span>← arraste →</span></div>
+  <div class="loop" id="valuesLoop" data-speed="-0.45">
+    <div class="loop-track">
+      <div class="val"><span>Experiência</span><span class="dot"></span><span class="o">Verdade</span><span class="dot"></span><span>Escuta</span><span class="dot"></span><span class="o">Excelência</span><span class="dot"></span><span>Independência</span><span class="dot"></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- MOMENTS -->
+<section class="moments grain" id="momentos" aria-label="Momentos decisivos">
+  <div id="mBgs"></div>
+  <div class="m-ghost" id="mGhost" aria-hidden="true">travessia</div>
+  <div class="wrap">
+    <div class="m-head">
+      <div>
+        <span class="eyebrow mono"><i></i>Quando a vida vira</span>
+        <h2 class="h2" style="margin-top:20px">Cada travessia pede uma decisão diferente.</h2>
+      </div>
+      <p>Uma venda, uma herança, uma mudança de país. São eventos que movimentam muito em pouco tempo, com informação incompleta e carga emocional alta. É exatamente aí que trabalhamos.</p>
+    </div>
+    <div class="m-now mono"><span>Agora</span><b id="mName">Venda da empresa</b><span class="bar"><i id="mBar"></i></span><span>← arraste</span></div>
+  </div>
+  <div class="loop m-loop" id="momentsLoop" data-speed="-0.35">
+    <div class="loop-track" id="mTrack"></div>
+  </div>
+</section>
+
+<!-- METHOD -->
+<section class="method" id="metodo">
+  <div class="wrap method-grid">
+    <div class="method-photo">
+      <img src="assets/acordo.jpg" alt="Duas pessoas apertam as mãos sobre documentos assinados numa mesa de escritório" loading="lazy">
+      <div class="tint"></div><div class="fade"></div>
+      <div class="float"><span class="mono" style="color:var(--brass-2)">Remuneração</span><p>Transparente e independente. Você sabe como somos pagos, e por quem.</p></div>
+    </div>
+    <div>
+      <span class="eyebrow mono" style="color:var(--brass)"><i></i>Método próprio</span>
+      <h2 class="h2" style="margin-top:20px">Decidir bem quando nem tudo está claro.</h2>
+      <p style="margin:20px 0 0;max-width:560px;color:rgba(45,55,72,.85)">Construímos um método para decidir com informação incompleta e carga emocional alta. Ele se apoia em anos de planejamento patrimonial e na formação em finanças comportamentais, e segue sempre a mesma ordem.</p>
+      <div class="steps">
+        <div class="step"><span class="n">1</span><div><h3>Escutar</h3><p>Entender o momento, a família e o que está em jogo de verdade, inclusive o que ainda não foi dito.</p></div></div>
+        <div class="step"><span class="n">2</span><div><h3>Separar</h3><p>Distinguir o que é urgente do que é irreversível. Nem toda decisão precisa ser tomada agora.</p></div></div>
+        <div class="step"><span class="n">3</span><div><h3>Decidir e sustentar</h3><p>Escolher com critério e acompanhar a vida que vem depois, para que a decisão continue de pé.</p></div></div>
+      </div>
+      <div class="creds">
+        <span class="chip"><i></i>Finanças comportamentais</span>
+        <span class="chip"><i></i>Certificações e especializações</span>
+        <span class="chip"><i></i>Seguros e previdência</span>
+        <span class="chip"><i></i>Remuneração independente</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STRATEGY / SPECIALTIES -->
+<section class="spec" id="estrategia">
+  <div class="wrap">
+    <div style="display:grid;gap:20px;align-items:end" class="md:grid-cols-2">
+      <div>
+        <span class="eyebrow mono" style="color:var(--brass)"><i></i>Especialidades</span>
+        <h2 class="h2" style="margin-top:20px">Uma única estratégia de planejamento.</h2>
+      </div>
+      <p style="margin:0;max-width:460px;color:rgba(45,55,72,.82)">Cada frente conversa com as outras. A sucessão depende do imóvel, que depende da previdência, que depende do que a família quer construir.</p>
+    </div>
+    <div class="spec-grid">
+      <a class="sc" href="#" data-wa="Planejamento para investimentos">
+        <img src="assets/cidade.jpg" alt="Vista aérea de São Paulo com prédios e a ponte estaiada" loading="lazy">
+        <div class="tint" style="background:#2d3748"></div><div class="fade"></div>
+        <span class="go" aria-hidden="true">→</span>
+        <h3>Planejamento para investimentos</h3>
+        <p>Estratégias para acumular, proteger e multiplicar seu patrimônio.</p>
+        <div class="chips"><span>Renda Fixa</span><span>Renda Variável</span><span>Multimercado</span></div>
+      </a>
+      <a class="sc" href="#" data-wa="Previdência">
+        <img src="assets/praia.jpg" alt="Casal caminha à beira-mar numa praia tranquila" loading="lazy">
+        <div class="tint" style="background:#5b4b2e"></div><div class="fade"></div>
+        <span class="go" aria-hidden="true">→</span>
+        <h3>Previdência</h3>
+        <p>Estratégias para conquistar eficiência tributária e sucessória.</p>
+      </a>
+      <a class="sc" href="#" data-wa="Internacional / Offshore">
+        <img src="assets/aeroporto.jpg" alt="Avião visto através da janela de um terminal de aeroporto" loading="lazy">
+        <div class="tint" style="background:#24485a"></div><div class="fade"></div>
+        <span class="go" aria-hidden="true">→</span>
+        <h3>Internacional / Offshore</h3>
+        <p>Estratégias para diversificação geográfica e proteção em moeda forte.</p>
+      </a>
+      <a class="sc" href="#" data-wa="Sucessório e Holding">
+        <img src="assets/familia.jpg" alt="Avós abraçam netos numa varanda de tijolos" loading="lazy" style="object-position:center 35%">
+        <div class="tint" style="background:#2f4a3f"></div><div class="fade"></div>
+        <span class="go" aria-hidden="true">→</span>
+        <h3>Sucessório e Holding</h3>
+        <p>Estratégias para desenhar estruturas societárias e perpetuar legado.</p>
+      </a>
+      <a class="sc" href="#" data-wa="Imobiliário">
+        <img src="assets/casa.jpg" alt="Casa moderna branca com piscina" loading="lazy">
+        <div class="tint" style="background:#3c4a62"></div><div class="fade"></div>
+        <span class="go" aria-hidden="true">→</span>
+        <h3>Imobiliário</h3>
+        <p>Planejamento para aquisição de imóveis, consórcios e financiamentos.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- AUDIENCE -->
+<section class="aud grain" id="para-quem">
+  <div class="wrap" style="position:relative">
+    <span class="eyebrow mono"><i></i>Para quem</span>
+    <h2 class="h2" style="margin-top:20px;max-width:900px">Para quem está no meio de uma travessia, não depois dela.</h2>
+    <div class="aud-grid">
+      <div class="th"><div class="v">R$ 5 mi<small>+</small></div><p>Pessoas e famílias com patrimônio a partir de R$ 5 milhões.</p></div>
+      <div class="th"><div class="v">R$ 50 mil<small>/mês</small></div><p>Ou renda familiar mensal a partir de R$ 50 mil.</p></div>
+      <div class="th"><div class="v">R$ 200 mil<small>+</small></div><p>Atravessando um evento que movimenta pelo menos esse valor, ou que altera de forma estrutural a renda.</p></div>
+    </div>
+    <div class="profiles" aria-label="Perfil típico">
+      <span>Sócios</span><span>Executivos</span><span>Profissionais liberais</span><span>Herdeiros</span><span>De 35 a 65 anos</span>
+    </div>
+  </div>
+</section>
+
+<!-- WHO -->
+<section class="who" id="quem">
+  <div class="wrap">
+    <div class="who-grid">
+      <div>
+        <span class="eyebrow mono" style="color:var(--brass)"><i></i>Quem conduz</span>
+        <h2 class="display who-name">Guilherme Parmegiani</h2>
+        <div class="who-role mono">Fundador · Planejamento patrimonial</div>
+      </div>
+      <div class="who-copy">
+        <p>Anos de experiência com planejamento patrimonial, formação em finanças comportamentais e especializações em seguros e previdência. Uma prática construída para os momentos em que a pressa e a emoção costumam decidir no lugar da família.</p>
+        <p>Sem produto para empurrar: a remuneração é transparente e independente, e a recomendação responde só ao que é melhor para você.</p>
+        <a class="btn btn-ink wa" href="#" target="_blank" rel="noopener" style="margin-top:8px">Conversar com Guilherme <span class="arr">→</span></a>
+      </div>
+    </div>
+    <div class="vision grain">
+      <span class="mono" style="position:relative;color:var(--brass-2)">Visão 2031</span>
+      <blockquote>Ser a referência brasileira em planejamento financeiro para momentos decisivos: <em>a casa que famílias e profissionais procuram primeiro quando a vida vira.</em></blockquote>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta" id="contato">
+  <img src="assets/ponte.jpg" alt="Ponte pênsil iluminada ao entardecer" loading="lazy">
+  <div class="tint"></div><div class="fade"></div>
+  <div class="wrap" style="position:relative">
+    <div class="cta-card">
+      <span class="eyebrow mono"><i></i>Primeira conversa</span>
+      <h2 class="h2" style="margin-top:18px">A melhor hora de conversar é antes da decisão.</h2>
+      <p>Conte o momento que você está atravessando. Em uma conversa, organizamos o que é urgente, o que pode esperar e por onde começar.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:28px">
+        <a class="btn btn-brass wa" href="#" target="_blank" rel="noopener">Agendar pelo WhatsApp <span class="arr">→</span></a>
+      </div>
+      <div class="contact-row">
+        <a class="wa" href="#" target="_blank" rel="noopener">+55 (11) 97523-8001</a>
+        <span>parmegiani@fwno.com.br</span>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="f-top">
+      <div>
+        <img src="logo-fwno-wealth-branco.svg" alt="Fwn.o Wealth" style="height:48px;width:auto">
+        <p style="margin:18px 0 0;max-width:360px">Poucos momentos definem o patrimônio de uma vida.</p>
+      </div>
+      <div>
+        <h4>Navegação</h4>
+        <ul><li><a href="#momentos">Momentos decisivos</a></li><li><a href="#metodo">Método</a></li><li><a href="#estrategia">Estratégia</a></li><li><a href="#quem">Quem conduz</a></li></ul>
+      </div>
+      <div>
+        <h4>Contato</h4>
+        <ul><li><a class="wa" href="#" target="_blank" rel="noopener">WhatsApp · +55 (11) 97523-8001</a></li><li>parmegiani@fwno.com.br</li><li><a href="https://www.awtgroup.com.br" target="_blank" rel="noopener">www.awtgroup.com.br</a></li></ul>
+      </div>
+    </div>
+    <div class="f-legal">
+      <p>A Fwn.o Wealth integra o ecossistema da AWT Alliance S.A. e atua em educação financeira e planejamento financeiro e patrimonial. Serviços sujeitos a regulação são prestados pelas empresas do AWT Group devidamente habilitadas para cada atividade. A administração e gestão de carteiras de valores mobiliários é realizada pela AWT Consultoria e Administração de Valores Mobiliários Ltda., CNPJ 35.137.445/0001-00, registrada perante a CVM.</p>
+      <p>Consulte os Avisos Legais e Regulatórios do AWT Group: <a href="https://www.awtgroup.com.br" target="_blank" rel="noopener" style="color:var(--brass-2)">www.awtgroup.com.br</a></p>
+      <p style="margin-top:18px;color:rgba(255,255,255,.55)">© 2026 Fwn.o Wealth</p>
+    </div>
+  </div>
+</footer>
+
+<a class="wa-float wa" href="#" target="_blank" rel="noopener" aria-label="Conversar pelo WhatsApp">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .2-1.3c-.1-.1-.2-.2-.5-.3Z"/></svg>
+</a>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(() => {
+  const PHONE = "5511975238001";
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const waLink = (t) => `https://wa.me/${PHONE}?text=${encodeURIComponent(t)}`;
+
+  // WhatsApp everywhere
+  document.querySelectorAll(".wa").forEach(a => a.href = waLink("Olá, Guilherme! Gostaria de agendar uma conversa com a Fwn.o Wealth."));
+  document.querySelectorAll("[data-wa]").forEach(a => {
+    a.href = waLink(`Olá, Guilherme! Quero conversar sobre ${a.dataset.wa}.`);
+    a.target = "_blank"; a.rel = "noopener";
+  });
+
+  // mobile drawer
+  const mb = document.querySelector(".menu-btn"), dr = document.getElementById("drawer");
+  mb.addEventListener("click", () => { const o = dr.classList.toggle("open"); mb.setAttribute("aria-expanded", o); });
+  dr.querySelectorAll("a").forEach(a => a.addEventListener("click", () => { dr.classList.remove("open"); mb.setAttribute("aria-expanded", false); }));
+
+  /* ---------- infinite drag loop ---------- */
+  function makeLoop(root, { onFrame } = {}) {
+    const track = root.querySelector(".loop-track");
+    const base = [...track.children];
+    // clone sets until the track is comfortably wider than 2 viewports
+    let setW = track.scrollWidth;
+    const copies = Math.max(2, Math.ceil((innerWidth * 2.2) / Math.max(setW, 1)) + 1);
+    for (let i = 1; i < copies; i++) base.forEach(n => { const c = n.cloneNode(true); c.setAttribute("aria-hidden", "true"); track.appendChild(c); });
+    const drift = parseFloat(root.dataset.speed || 0) * (reduce ? 0.45 : 1);
+    let x = 0, v = 0, dragging = false, lastX = 0, lastT = 0, moved = 0;
+    const measure = () => { setW = base.reduce((w, n) => w + n.getBoundingClientRect().width + parseFloat(getComputedStyle(n).marginRight || 0), 0); };
+    measure(); addEventListener("resize", measure);
+
+    root.addEventListener("pointerdown", e => {
+      dragging = true; moved = 0; lastX = e.clientX; lastT = performance.now(); v = 0;
+      root.setPointerCapture(e.pointerId);
+    });
+    root.addEventListener("pointermove", e => {
+      if (!dragging) return;
+      const now = performance.now(), dx = e.clientX - lastX;
+      x += dx; moved += Math.abs(dx);
+      v = dx / Math.max(now - lastT, 1) * 16;
+      lastX = e.clientX; lastT = now;
+    });
+    const end = () => { dragging = false; };
+    root.addEventListener("pointerup", end); root.addEventListener("pointercancel", end);
+    // a drag should not trigger the click on a card/link inside
+    root.addEventListener("click", e => { if (moved > 6) { e.preventDefault(); e.stopPropagation(); } }, true);
+    root.addEventListener("dragstart", e => e.preventDefault());
+
+    (function tick() {
+      if (!dragging) { x += v + drift; v *= 0.94; if (Math.abs(v) < 0.01) v = 0; }
+      if (setW > 0) { x = ((x % setW) - setW) % setW; } // keep in (-setW, 0]
+      track.style.transform = `translate3d(${x}px,0,0)`;
+      onFrame && onFrame(x, setW);
+      requestAnimationFrame(tick);
+    })();
+  }
+
+  makeLoop(document.getElementById("valuesLoop"));
+
+  /* ---------- moments: drag swaps the section colour ---------- */
+  const moments = [
+    { t: "Venda da empresa", tag: "Liquidez", img: "acordo2.jpg", c: "#4a3a2a", d: "Anos de trabalho viram liquidez em um único dia. O que fazer com o valor, e com o tempo, define a próxima década.", q: "Em jogo: proteção do valor, tributação e o novo papel do fundador." },
+    { t: "Herança e sucessão", tag: "Legado", img: "avo-neto.jpg", c: "#2f4a3f", d: "O patrimônio muda de mãos e as relações também. Decidir junto evita que a família se divida no processo.", q: "Em jogo: inventário, holding familiar e acordos entre herdeiros." },
+    { t: "Chegada de um filho", tag: "Família", img: "bebe.jpg", c: "#5a3b46", d: "A família cresce e o horizonte se alonga. É hora de pensar em proteção, educação e no que fica para a próxima geração.", q: "Em jogo: seguros, previdência e reserva para a educação." },
+    { t: "Mudança de país", tag: "Internacional", img: "aeroporto.jpg", c: "#24485a", d: "Uma carreira lá fora, um filho estudando longe, uma vida em outra moeda. A travessia é geográfica e patrimonial.", q: "Em jogo: residência fiscal, moeda forte e estrutura offshore." },
+    { t: "Compra do imóvel", tag: "Imobiliário", img: "casa.jpg", c: "#3c4a62", d: "A casa da família é decisão de patrimônio e de vida. À vista, financiada ou por consórcio, cada caminho tem um custo diferente.", q: "Em jogo: liquidez, crédito e titularidade do imóvel." },
+    { t: "Aposentadoria", tag: "Renda", img: "praia.jpg", c: "#5b4b2e", d: "Parar de trabalhar não é parar de decidir. O patrimônio passa a sustentar a renda, por muitos anos.", q: "Em jogo: renda recorrente, previdência e longevidade." },
+    { t: "Bônus ou dividendos", tag: "Renda extraordinária", img: "cidade.jpg", c: "#3e3a5a", d: "Um valor alto que entra de uma vez. Sem um plano, ele se dilui em pouco tempo. Com um plano, muda a estrutura da família.", q: "Em jogo: disciplina, tributação e objetivos de longo prazo." }
+  ];
+  const bgs = document.getElementById("mBgs"), mTrack = document.getElementById("mTrack");
+  moments.forEach((m, i) => {
+    const bg = document.createElement("div");
+    bg.className = "m-bg" + (i === 0 ? " on" : "");
+    bg.style.background = `radial-gradient(70% 80% at 85% 10%, rgba(255,255,255,.10), transparent 60%), radial-gradient(60% 70% at 0% 100%, rgba(0,0,0,.35), transparent 70%), ${m.c}`;
+    bgs.appendChild(bg);
+    const card = document.createElement("article");
+    card.className = "m-card"; card.dataset.i = i;
+    card.innerHTML = `<div class="m-photo"><img src="assets/${m.img}" alt="" draggable="false" loading="lazy"><div class="tint" style="background:${m.c}"></div><div class="fade"></div><span class="tag mono">${m.tag}</span></div>
+      <div class="m-body"><h3>${m.t}</h3><p>${m.d}</p><div class="q">${m.q}</div></div>`;
+    mTrack.appendChild(card);
+  });
+  const bgEls = [...bgs.children], mName = document.getElementById("mName"), mBar = document.getElementById("mBar"), mGhost = document.getElementById("mGhost");
+  let active = -1;
+  const mLoop = document.getElementById("momentsLoop");
+  makeLoop(mLoop, {
+    onFrame() {
+      // the card whose centre sits nearest the focus line (left third of the viewport) is "now"
+      const focus = Math.min(innerWidth * 0.3, 380);
+      let best = null, bd = Infinity;
+      mTrack.querySelectorAll(".m-card").forEach(c => {
+        const r = c.getBoundingClientRect(), d = Math.abs(r.left + r.width / 2 - focus);
+        if (d < bd) { bd = d; best = c; }
+      });
+      const i = best ? +best.dataset.i : 0;
+      if (i !== active) {
+        active = i;
+        bgEls.forEach((b, k) => b.classList.toggle("on", k === i));
+        mTrack.querySelectorAll(".m-card").forEach(c => c.classList.toggle("active", c === best));
+        mName.textContent = moments[i].t;
+        mBar.style.transform = `scaleX(${(i + 1) / moments.length})`;
+        mGhost.textContent = moments[i].tag.toLowerCase();
+      } else if (best && !best.classList.contains("active")) {
+        mTrack.querySelectorAll(".m-card.active").forEach(c => c.classList.remove("active"));
+        best.classList.add("active");
+      }
+    }
+  });
+
+  /* ---------- hero: 3D symbol, drag to rotate ---------- */
+  const stage = document.getElementById("stage");
+  if (window.THREE) {
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+    renderer.outputEncoding = THREE.sRGBEncoding;
+    stage.prepend(renderer.domElement);
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(32, 1, 0.1, 100);
+    camera.position.set(0, 0, 9);
+
+    // symbol outline, same geometry as the logo (100-unit box, y flipped)
+    const S = 0.042, P = (x, y) => [(x - 52) * S, -(y - 53) * S];
+    const sh = new THREE.Shape();
+    sh.moveTo(...P(13.5, 100));
+    sh.lineTo(...P(13.5, 48));
+    sh.absarc(...P(56, 48), 42.5 * S, Math.PI, Math.PI / 2, true);
+    sh.lineTo(...P(90, 5.5));
+    sh.lineTo(...P(90, 22.5));
+    sh.lineTo(...P(56, 22.5));
+    sh.absarc(...P(56, 48), 25.5 * S, Math.PI / 2, Math.PI, false);
+    sh.lineTo(...P(30.5, 100));
+    sh.closePath();
+    const arm = new THREE.Shape();
+    arm.moveTo(...P(30, 50)); arm.lineTo(...P(58, 50)); arm.lineTo(...P(58, 67)); arm.lineTo(...P(30, 67)); arm.closePath();
+    const dot = new THREE.Shape(); dot.absarc(...P(77, 58.5), 10 * S, 0, Math.PI * 2, false);
+
+    const ex = { depth: 0.55, bevelEnabled: true, bevelThickness: 0.08, bevelSize: 0.06, bevelSegments: 6, curveSegments: 48 };
+    const metal = new THREE.MeshStandardMaterial({ color: 0xdfe5ee, metalness: 0.55, roughness: 0.28 });
+    const brass = new THREE.MeshStandardMaterial({ color: 0xd9a46c, metalness: 0.7, roughness: 0.25 });
+    const group = new THREE.Group();
+    [sh, arm].forEach(s => { const g = new THREE.ExtrudeGeometry(s, ex); g.translate(0, 0, -0.275); group.add(new THREE.Mesh(g, metal)); });
+    const dg = new THREE.ExtrudeGeometry(dot, ex); dg.translate(0, 0, -0.275); group.add(new THREE.Mesh(dg, brass));
+    scene.add(group);
+
+    // orbit of small "moments" around the symbol
+    const orbit = new THREE.Group();
+    const pm = new THREE.MeshStandardMaterial({ color: 0xe2b98e, metalness: 0.4, roughness: 0.4, emissive: 0x3a2410 });
+    for (let i = 0; i < 7; i++) {
+      const a = (i / 7) * Math.PI * 2, m = new THREE.Mesh(new THREE.SphereGeometry(i % 3 === 0 ? 0.09 : 0.055, 24, 24), pm);
+      m.position.set(Math.cos(a) * 2.9, Math.sin(a * 2) * 0.35, Math.sin(a) * 2.9); orbit.add(m);
+    }
+    const ring = new THREE.Mesh(new THREE.TorusGeometry(2.9, 0.008, 8, 200), new THREE.MeshBasicMaterial({ color: 0x9fb0c8, transparent: true, opacity: 0.35 }));
+    ring.rotation.x = Math.PI / 2; orbit.add(ring);
+    orbit.rotation.x = 0.28;
+    scene.add(orbit);
+
+    scene.add(new THREE.HemisphereLight(0xcfd8e6, 0x1a212d, 0.9));
+    const key = new THREE.DirectionalLight(0xffe2c2, 1.6); key.position.set(4, 5, 6); scene.add(key);
+    const rim = new THREE.DirectionalLight(0x8fb0e0, 1.3); rim.position.set(-6, -2, -4); scene.add(rim);
+    const fill = new THREE.PointLight(0xc9945f, 1.2, 20); fill.position.set(-3, 2, 4); scene.add(fill);
+
+    const resize = () => {
+      const w = stage.clientWidth, h = stage.clientHeight;
+      renderer.setSize(w, h, false); camera.aspect = w / h;
+      camera.position.z = w < 520 ? 10.5 : 9; camera.updateProjectionMatrix();
+    };
+    resize(); addEventListener("resize", resize);
+
+    let ry = -0.5, rx = 0.12, vy = 0, vx = 0, drag = false, px = 0, py = 0;
+    const idle = reduce ? 0.0016 : 0.0038;
+    stage.addEventListener("pointerdown", e => { drag = true; px = e.clientX; py = e.clientY; vy = vx = 0; stage.setPointerCapture(e.pointerId); });
+    stage.addEventListener("pointermove", e => {
+      if (!drag) return;
+      const dx = e.clientX - px, dy = e.clientY - py; px = e.clientX; py = e.clientY;
+      vy = dx * 0.006; vx = dy * 0.004; ry += vy; rx += vx;
+    });
+    const up = () => drag = false; stage.addEventListener("pointerup", up); stage.addEventListener("pointercancel", up);
+
+    const clock = new THREE.Clock();
+    (function loop() {
+      const t = clock.getElapsedTime();
+      if (!drag) { ry += vy + idle; rx += vx; vy *= 0.95; vx *= 0.9; rx += (0.12 - rx) * 0.03; }
+      rx = Math.max(-0.9, Math.min(0.9, rx));
+      group.rotation.set(rx, ry, 0);
+      group.position.y = Math.sin(t * 0.8) * 0.06;
+      orbit.rotation.y = -ry * 0.35 + t * (reduce ? 0.05 : 0.12);
+      renderer.render(scene, camera);
+      requestAnimationFrame(loop);
+    })();
+  }
+})();
+</script>
+</body>
+</html>
